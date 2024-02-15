@@ -1,0 +1,64 @@
+import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
+import org.openapitools.generator.gradle.plugin.tasks.ValidateTask
+
+plugins {
+    id "org.openapi.generator" version "7.3.0"
+    id 'java'
+    id 'idea'
+}
+
+group = 'com.alenasoft'
+version = '1.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+ext.set('swaggerFile', "${projectDir}/swagger.yml")
+
+def swaggerOutputDir = layout.buildDirectory.dir("generated-src/swagger").get().toString()
+
+tasks.register('generateClient', GenerateTask) {
+    generatorName.set("java")
+    inputSpec.set(swaggerFile.toString())
+    outputDir.set(swaggerOutputDir)
+    configOptions.set([dateLibrary: "java8", useJakartaEe: "true"])
+}
+
+generateClient.mustRunAfter('clean')
+compileJava.dependsOn('generateClient')
+
+sourceSets.main.java.srcDir layout.buildDirectory.dir("generated-src/swagger/src/main/java").get().asFile
+
+idea {
+    module {
+        generatedSourceDirs += layout.buildDirectory.dir("generated-src/swagger/src/main/java").get().asFile
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
+    implementation 'org.openapitools:jackson-databind-nullable:0.2.6'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
+    implementation 'com.google.code.gson:gson:2.9.1'
+    implementation 'io.gsonfire:gson-fire:1.9.0'
+
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
