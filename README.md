@@ -31,7 +31,7 @@ The generated [Pet.java](build/generated-src/swagger/src/main/java/org/openapito
 private String tag;
 ```
 
-And the expected type should be JsonNullable and undefined as default value.
+And the expected type and the default value should be:
 
 ```java
 private JsonNullable<String> tag = JsonNullable.undefined();
