@@ -23,10 +23,15 @@ ext.set('swaggerFile', "${projectDir}/swagger.yml")
 def swaggerOutputDir = layout.buildDirectory.dir("generated-src/swagger").get().toString()
 
 tasks.register('generateClient', GenerateTask) {
-    generatorName.set("spring")
+//    generatorName.set("spring") // generates JsonNullable types, but its a spring server application, not a client
+    generatorName.set("java") // This is not generating JsonNullable types, but create a full client
     inputSpec.set(swaggerFile.toString())
     outputDir.set(swaggerOutputDir)
-    configOptions.set([dateLibrary: "java8", useJakartaEe: "true", openApiNullable:"true"])
+    configOptions.set([
+            dateLibrary: "java8",
+            useJakartaEe: "true",
+            openApiNullable: "true" // This is enabled by default
+    ])
 }
 
 generateClient.mustRunAfter('clean')

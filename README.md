@@ -1,8 +1,20 @@
-# Update
+# Update 2.
+
+The update 1, its fine if the goal is generate a server application with spring.
+
+Unfortunately generate a client still having the same issue reported.
+
+Using generatorName: "spring" the Pet result is: [Pet.java](src/test/resources/Pet.java)
+
+But using generatorName: "java" the Pet has no the JsonNullable types: [Pet.java](build/generated-src/swagger/src/main/java/org/openapitools/client/model/Pet.java)
+
+
+# Update 1. (Nothing fixed)
 
 The issue was fixed in this [commit](https://github.com/robertop87/opengen/commit/540a8dd4f6e51f4b95eff452f63e32a10dc50a48). The new [Pet.java](build/generated-src/swagger/src/main/java/org/openapitools/model/Pet.java) result is correct.
 
 You can read the above lines to understand the reported issue.
+
 
 ## Environment
 

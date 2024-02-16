@@ -1,27 +1,19 @@
 package org.openapitools.model;
 
-import java.net.URI;
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import java.util.Arrays;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.time.OffsetDateTime;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
-
-
-import java.util.*;
 import jakarta.annotation.Generated;
+import jakarta.validation.constraints.NotNull;
+import org.openapitools.jackson.nullable.JsonNullable;
+
+import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Pet
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-02-16T10:05:38.599614343-04:00[America/La_Paz]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-02-16T15:00:11.670492024-04:00[America/La_Paz]")
 public class Pet {
 
   private Long id;
