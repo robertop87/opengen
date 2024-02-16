@@ -1,3 +1,9 @@
+# Update
+
+The issue was fixed in this commit. The new [Pet.java](build/generated-src/swagger/src/main/java/org/openapitools/model/Pet.java) result is correct.
+
+You can read the above lines to understand the reported issue.
+
 ## Environment
 
 Gradle plugin: "org.openapi.generator" version "7.3.0"
