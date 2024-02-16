@@ -1,6 +1,6 @@
 # Update
 
-The issue was fixed in this commit. The new [Pet.java](build/generated-src/swagger/src/main/java/org/openapitools/model/Pet.java) result is correct.
+The issue was fixed in this [commit](https://github.com/robertop87/opengen/commit/540a8dd4f6e51f4b95eff452f63e32a10dc50a48). The new [Pet.java](build/generated-src/swagger/src/main/java/org/openapitools/model/Pet.java) result is correct.
 
 You can read the above lines to understand the reported issue.
 
