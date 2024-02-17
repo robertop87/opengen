@@ -1,3 +1,21 @@
+# Update 4.
+
+The java client generator works as expected using library set to webclient.
+
+```groovy
+tasks.register('generateClient', GenerateTask) {
+    generatorName.set("java")
+    library.set("webclient") // only with webclient the JsonNullable are generated properly
+    inputSpec.set(swaggerFile.toString())
+    outputDir.set(swaggerOutputDir)
+    configOptions.set([
+            dateLibrary: "java8",
+            useJakartaEe: "true",
+            openApiNullable: "true" // This is enabled by default
+    ])
+}
+```
+
 # Update 3.
 
 Trying to enable `x-is-jackson-optional-nullable` extension. According docs it should generate the expected JsonNullable types.
@@ -13,7 +31,6 @@ Unfortunately generate a client still having the same issue reported.
 Using generatorName: "spring" the Pet result is: [Pet.java](src/test/resources/Pet.java)
 
 But using generatorName: "java" the Pet has no the JsonNullable types: [Pet.java](build/generated-src/swagger/src/main/java/org/openapitools/client/model/Pet.java)
-
 
 # Update 1. (Nothing fixed)
 
