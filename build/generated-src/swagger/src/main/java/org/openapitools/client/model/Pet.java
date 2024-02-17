@@ -50,7 +50,7 @@ import org.openapitools.client.JSON;
 /**
  * Pet
  */
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-02-16T15:08:20.145061736-04:00[America/La_Paz]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-02-17T09:23:03.813749765-04:00[America/La_Paz]")
 public class Pet {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)

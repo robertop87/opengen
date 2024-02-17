@@ -1,3 +1,9 @@
+# Update 3.
+
+Trying to enable `x-is-jackson-optional-nullable` extension. According docs it should generate the expected JsonNullable types.
+
+But it's not working, the extension has no effect in swagger.yml.
+
 # Update 2.
 
 The update 1, its fine if the goal is generate a server application with spring.
