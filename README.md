@@ -1,3 +1,15 @@
+# Update 5
+
+The java client generator does not generate JsonNullable for the next library configurations: okhttp-gson, microprofile
+
+But next libraries generate the JsonNullable as expected:
+
+  jersey2, jersey3, feign, retrofit2, resttemplate, webclient, resteasy, vertx, google-api-client, rest-assured, native, apache-httpclient
+
+Latest incorrect [Pet.java generated](build/generated-src/swagger/src/main/java/org/openapitools/client/model/Pet.java).
+
+Expected model generated [Pet.java](src/test/resources/Pet.java)
+
 # Update 4.
 
 The java client generator works as expected using library set to webclient.

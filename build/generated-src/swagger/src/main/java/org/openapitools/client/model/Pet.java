@@ -14,43 +14,60 @@
 package org.openapitools.client.model;
 
 import java.util.Objects;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
 import org.openapitools.jackson.nullable.JsonNullable;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.openapitools.client.JSON;
 
 /**
  * Pet
  */
-@JsonPropertyOrder({
-  Pet.JSON_PROPERTY_ID,
-  Pet.JSON_PROPERTY_NAME,
-  Pet.JSON_PROPERTY_TAG
-})
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-02-17T10:58:04.523050457-04:00[America/La_Paz]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-02-21T14:27:54.271259626-04:00[America/La_Paz]")
 public class Pet {
-  public static final String JSON_PROPERTY_ID = "id";
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
   private Long id;
 
-  public static final String JSON_PROPERTY_NAME = "name";
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
-  public static final String JSON_PROPERTY_TAG = "tag";
-  private JsonNullable<String> tag = JsonNullable.<String>undefined();
+  public static final String SERIALIZED_NAME_TAG = "tag";
+  @SerializedName(SERIALIZED_NAME_TAG)
+  private String tag; // This must be: JsonNullable<String> tag = JsonNullable.undefined();
 
   public Pet() {
   }
 
   public Pet id(Long id) {
-    
     this.id = id;
     return this;
   }
@@ -60,23 +77,16 @@ public class Pet {
    * @return id
   **/
   @jakarta.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public Long getId() {
     return id;
   }
 
-
-  @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setId(Long id) {
     this.id = id;
   }
 
 
   public Pet name(String name) {
-    
     this.name = name;
     return this;
   }
@@ -86,24 +96,17 @@ public class Pet {
    * @return name
   **/
   @jakarta.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_NAME)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public String getName() {
     return name;
   }
 
-
-  @JsonProperty(JSON_PROPERTY_NAME)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setName(String name) {
     this.name = name;
   }
 
 
   public Pet tag(String tag) {
-    this.tag = JsonNullable.<String>of(tag);
-    
+    this.tag = tag;
     return this;
   }
 
@@ -112,27 +115,15 @@ public class Pet {
    * @return tag
   **/
   @jakarta.annotation.Nullable
-  @JsonIgnore
-
   public String getTag() {
-        return tag.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_TAG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<String> getTag_JsonNullable() {
     return tag;
-  }
-  
-  @JsonProperty(JSON_PROPERTY_TAG)
-  public void setTag_JsonNullable(JsonNullable<String> tag) {
-    this.tag = tag;
   }
 
   public void setTag(String tag) {
-    this.tag = JsonNullable.<String>of(tag);
+    this.tag = tag;
   }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -145,7 +136,7 @@ public class Pet {
     Pet pet = (Pet) o;
     return Objects.equals(this.id, pet.id) &&
         Objects.equals(this.name, pet.name) &&
-        equalsNullable(this.tag, pet.tag);
+        Objects.equals(this.tag, pet.tag);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -154,7 +145,7 @@ public class Pet {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, hashCodeNullable(tag));
+    return Objects.hash(id, name, tag);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -186,5 +177,106 @@ public class Pet {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("id");
+    openapiFields.add("name");
+    openapiFields.add("tag");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("id");
+    openapiRequiredFields.add("name");
+  }
+
+ /**
+  * Validates the JSON Element and throws an exception if issues found
+  *
+  * @param jsonElement JSON Element
+  * @throws IOException if the JSON Element is invalid with respect to Pet
+  */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!Pet.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in Pet is not found in the empty JSON string", Pet.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Map.Entry<String, JsonElement> entry : entries) {
+        if (!Pet.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `Pet` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : Pet.openapiRequiredFields) {
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+        }
+      }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
+      if (!jsonObj.get("name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
+      }
+      if ((jsonObj.get("tag") != null && !jsonObj.get("tag").isJsonNull()) && !jsonObj.get("tag").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `tag` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tag").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!Pet.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'Pet' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<Pet> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(Pet.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<Pet>() {
+           @Override
+           public void write(JsonWriter out, Pet value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public Pet read(JsonReader in) throws IOException {
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of Pet given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of Pet
+  * @throws IOException if the JSON string is invalid with respect to Pet
+  */
+  public static Pet fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, Pet.class);
+  }
+
+ /**
+  * Convert an instance of Pet to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

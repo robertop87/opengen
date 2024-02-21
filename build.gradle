@@ -24,7 +24,12 @@ def swaggerOutputDir = layout.buildDirectory.dir("generated-src/swagger").get().
 
 tasks.register('generateClient', GenerateTask) {
     generatorName.set("java")
-    library.set("webclient") // only with webclient the JsonNullable are generated properly
+    // available libraries list: https://openapi-generator.tech/docs/generators/java/
+    // Default: okhttp-gson
+    // The next libraries does not generate the expected JsonNullable: okhttp-gson, microprofile
+    // The next libraries does generate JsonNullable properly:
+    //   jersey2, jersey3, feign, retrofit2, resttemplate, webclient, resteasy, vertx, google-api-client, rest-assured, native, apache-httpclient
+    library.set("okhttp-gson") // <-- using default just for testing purposes
     inputSpec.set(swaggerFile.toString())
     outputDir.set(swaggerOutputDir)
     configOptions.set([
